@@ -239,11 +239,11 @@ func (u *BidUsecase) SubmitDecision(ctx context.Context, username string, bidID 
 		}
 
 		if bid.ShipsCount >= bid.Kvorum {
-			err := u.bidRepo.UpdateBidStatus(ctx, bidID, entity.BApproved)
-			if err != nil {
-				return nil, fmt.Errorf("update bid to approved: %w", err)
-			}
-			bid.Status = entity.BApproved
+			// err := u.bidRepo.UpdateBidStatus(ctx, bidID, entity.BApproved)
+			// if err != nil {
+			// 	return nil, fmt.Errorf("update bid to approved: %w", err)
+			// }
+			// bid.Status = entity.BApproved
 
 			if err := u.tenderRepo.UpdateTenderStatus(ctx, bid.TenderID, entity.Closed); err != nil {
 				return nil, fmt.Errorf("update tender status by id: %w", err)
@@ -268,9 +268,12 @@ func (u *BidUsecase) FeedbackBid(ctx context.Context, username string, bidID uui
 		return nil, fmt.Errorf("get bid by id: %w", err)
 	}
 
-	if bid.Status != entity.BApproved {
-		return nil, entity.ErrUserPermissionRewiew
+	if bid.ShipsCount < bid.Kvorum {
+		return nil, entity.ErrUserPermissionRewiew	
 	}
+	// if bid.Status != entity.BApproved {
+	// 	return nil, entity.ErrUserPermissionRewiew
+	// }
 
 	_, err = u.bidRepo.CreateFeedback(ctx, &entity.BidRewiew{
 		Description: bidFeedback,

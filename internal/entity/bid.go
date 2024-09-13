@@ -31,10 +31,9 @@ const (
 	BCreated   BidStatusType = "Created"
 	BPublished BidStatusType = "Published"
 	BCanceled  BidStatusType = "Canceled"
-	BApproved  BidStatusType = "Approved"
 )
 
-var BidStatusTypeList = []BidStatusType{BCreated, BPublished, BCanceled, BApproved}
+var BidStatusTypeList = []BidStatusType{BCreated, BPublished, BCanceled}
 
 type Bid struct {
 	Id          uuid.UUID     `json:"id"`

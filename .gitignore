@@ -31,3 +31,6 @@ HELP.md
 
 Taskfile.yml
 /bin/
+*.json
+util.go
+*.csv

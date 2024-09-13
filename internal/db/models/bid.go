@@ -43,10 +43,9 @@ const (
 	BCreated   BidStatusType = "Created"
 	BPublished BidStatusType = "Published"
 	BCanceled  BidStatusType = "Canceled"
-	BApproved  BidStatusType = "Approved"
 )
 
-var BidStatusTypeList = []BidStatusType{BCreated, BPublished, BCanceled, BApproved}
+var BidStatusTypeList = []BidStatusType{BCreated, BPublished, BCanceled}
 
 func (s *BidStatusType) Scan(value any) error {
 	strValue, ok := value.(string)
