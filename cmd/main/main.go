@@ -4,6 +4,7 @@ import (
 	"avito/api/controllers/bid"
 	"avito/api/controllers/ping"
 	"avito/api/controllers/tender"
+	"avito/api/controllers/testcontroller"
 	"avito/internal/config"
 	"avito/internal/db/repos"
 	"avito/internal/usecases"
@@ -52,6 +53,8 @@ func main() {
 	tenderController := tender.NewTenderController(tenderUsecase)
 	bidController := bid.NewBidController(bidUsecase)
 
+	test_controller, _ := testcontroller.NewTestcontroller(&cfg.DB)
+
 	r := mux.NewRouter()
 	api := r.PathPrefix("/api/").Subrouter()
 	api.Use(ctxTimeoutMiddleware)
@@ -77,6 +80,8 @@ func main() {
 	api.HandleFunc("/bids/{tenderId}/list", bidController.GetTenderBidsList).Methods("GET")
 	api.HandleFunc("/bids/my", bidController.GetMyBids).Methods("GET")
 	api.HandleFunc("/bids/new", bidController.CreateBid).Methods("POST")
+
+	api.HandleFunc("/get_test_data", test_controller.GetData).Methods("GET")
 
 	http.ListenAndServe(cfg.Server.ServerAddress, r)
 }
