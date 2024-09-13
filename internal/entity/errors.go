@@ -21,6 +21,7 @@ var (
 var (
 	ErrUserPermissionCreateTender = errors.New("user dont have permission to create tender for this org")
 	ErrUserPermissionTender       = errors.New("user dont have permission to this tender")
+	ErrUserPermissionBidsTender       = errors.New("user dont have permission to see bids for this tender")
 	ErrCreateBidTender            = errors.New("cant create bid to not public tender")
 	ErrShipBidTender              = errors.New("cant ship not public bid")
 	ErrFeedbackPermission         = errors.New("cant see this feedbacks")

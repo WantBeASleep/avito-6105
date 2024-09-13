@@ -37,9 +37,12 @@ func ErrorHandler(w http.ResponseWriter, err error) {
 
 	case errors.Is(err, entity.ErrCreateBidTender):
 		ErrorJSON(w, http.StatusForbidden, entity.ErrCreateBidTender)
-
+		
 	case errors.Is(err, entity.ErrUserPermissionBid):
 		ErrorJSON(w, http.StatusForbidden, entity.ErrUserPermissionBid)
+
+	case errors.Is(err, entity.ErrUserPermissionBidsTender):
+		ErrorJSON(w, http.StatusForbidden, entity.ErrUserPermissionBidsTender)
 
 	case errors.Is(err, entity.ErrUserPermissionCreateTender):
 		ErrorJSON(w, http.StatusForbidden, entity.ErrUserPermissionCreateTender)

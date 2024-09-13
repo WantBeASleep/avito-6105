@@ -122,7 +122,7 @@ func (u *BidUsecase) GetTenderBidsList(ctx context.Context, username string, ten
 		return nil, fmt.Errorf("get tender bids: %w", err)
 	}
 	if len(bids) == 0 {
-		return nil, entity.ErrUserPermissionTender
+		return nil, entity.ErrUserPermissionBidsTender
 	}
 
 	return bids, nil
@@ -269,7 +269,7 @@ func (u *BidUsecase) FeedbackBid(ctx context.Context, username string, bidID uui
 	}
 
 	if bid.ShipsCount < bid.Kvorum {
-		return nil, entity.ErrUserPermissionRewiew	
+		return nil, entity.ErrUserPermissionRewiew
 	}
 	// if bid.Status != entity.BApproved {
 	// 	return nil, entity.ErrUserPermissionRewiew

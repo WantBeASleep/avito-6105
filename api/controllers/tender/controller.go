@@ -80,12 +80,12 @@ func (c *Controller) GetMyTenders(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// НЕ ПОНЯТНО, КАК ЛУЧШЕ ОСТАВИТЬ???
-	// username, _ := parsers.ParseQuery(r, "username", false, parsers.ParserEmptyString)
-	username, err := parsers.ParseQuery(r, "username", true, parsers.ParserEmptyString)
-	if err != nil {
-		responses.ErrorHandler(w, err)
-		return
-	}
+	username, _ := parsers.ParseQuery(r, "username", false, parsers.ParserEmptyString)
+	// username, err := parsers.ParseQuery(r, "username", true, parsers.ParserEmptyString)
+	// if err != nil {
+	// 	responses.ErrorHandler(w, err)
+	// 	return
+	// }
 
 	resp, err := c.tenderUsecase.GetMyTenders(ctx, username, pagination)
 	if err != nil {
