@@ -34,3 +34,5 @@ Taskfile.yml
 *.json
 util.go
 *.csv
+/trash/
+*.gitignore
