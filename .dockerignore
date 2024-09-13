@@ -1,7 +1,6 @@
-.idea
-*.iml
 .git/
-.gradle
-gradle
-out/
+.gitignore
+задание/
+Taskfile.yml
+README.md
 Dockerfile
