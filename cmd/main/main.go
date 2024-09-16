@@ -4,7 +4,6 @@ import (
 	"avito/api/controllers/bid"
 	"avito/api/controllers/ping"
 	"avito/api/controllers/tender"
-	"avito/api/controllers/testcontroller"
 	"avito/internal/config"
 	"avito/internal/db/repos"
 	"avito/internal/usecases"
@@ -26,13 +25,6 @@ func ctxTimeoutMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-// func dbgMiddleware(next http.Handler) http.Handler {
-// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		fmt.Printf("REQ: url=%s vars=%v\n", r.URL.String(), mux.Vars(r))
-// 		next.ServeHTTP(w, r)
-// 	})
-// }
-
 func main() {
 	cfg := config.LoadEnv()
 
@@ -52,8 +44,6 @@ func main() {
 	pingController := ping.Controller{}
 	tenderController := tender.NewTenderController(tenderUsecase)
 	bidController := bid.NewBidController(bidUsecase)
-
-	test_controller, _ := testcontroller.NewTestcontroller(&cfg.DB)
 
 	r := mux.NewRouter()
 	api := r.PathPrefix("/api/").Subrouter()
@@ -80,8 +70,6 @@ func main() {
 	api.HandleFunc("/bids/{tenderId}/list", bidController.GetTenderBidsList).Methods("GET")
 	api.HandleFunc("/bids/my", bidController.GetMyBids).Methods("GET")
 	api.HandleFunc("/bids/new", bidController.CreateBid).Methods("POST")
-
-	api.HandleFunc("/get_test_data", test_controller.GetData).Methods("GET")
 
 	http.ListenAndServe(cfg.Server.ServerAddress, r)
 }

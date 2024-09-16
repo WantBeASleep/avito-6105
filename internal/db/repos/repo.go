@@ -62,7 +62,7 @@ func (c *ctrl) initIfNeed(db *gorm.DB) error {
 	db.Exec("CREATE TYPE tender_status_type AS ENUM ('Created', 'Published', 'Closed');")
 
 	db.Exec("CREATE TYPE author_type AS ENUM ('Organization', 'User');")
-	db.Exec("CREATE TYPE bid_status_type AS ENUM ('Created', 'Published', 'Canceled', 'Approved');")
+	db.Exec("CREATE TYPE bid_status_type AS ENUM ('Created', 'Published', 'Canceled');")
 
 	err := db.AutoMigrate(
 		&models.Tender{},
